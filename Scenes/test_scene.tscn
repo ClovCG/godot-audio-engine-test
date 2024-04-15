@@ -1,0 +1,145 @@
+[gd_scene load_steps=2 format=3 uid="uid://d13fi0dqra3bf"]
+
+[ext_resource type="Script" path="res://Scripts/audio_manager.gd" id="3_70iky"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Panel/Margin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="NowPlaying" type="RichTextLabel" parent="Canvas/Panel/Margin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Stopped"
+fit_content = true
+scroll_active = false
+
+[node name="Beats" type="RichTextLabel" parent="Canvas/Panel/Margin/VBoxContainer"]
+layout_mode = 2
+text = "-"
+fit_content = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Canvas/Panel/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Play" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "PLAY"
+
+[node name="Pause" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "PAUSE"
+
+[node name="Stop" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "STOP (Instant)"
+
+[node name="Stop2" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "STOP (Fade-out)"
+
+[node name="Prev loop end" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Previous loop-end point"
+
+[node name="Next loop end" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Next loop-end point"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Panel/Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Normal Controls" type="RichTextLabel" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Normal transition controls"
+fit_content = true
+scroll_active = false
+
+[node name="Transition" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Transition"
+
+[node name="Instant Tr" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Instant Transition"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Canvas/Panel/Margin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Beat Controls" type="RichTextLabel" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Beat transition controls"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Transition" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Track 0"
+
+[node name="Transition2" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Track 1"
+
+[node name="Transition3" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Track 2"
+
+[node name="Transition4" type="Button" parent="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Track 3"
+
+[node name="AudioManager" type="Node2D" parent="."]
+script = ExtResource("3_70iky")
+
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Play" to="AudioManager" method="_on_play_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Pause" to="AudioManager" method="_on_pause_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Stop" to="AudioManager" method="_on_stop_pressed" binds= [0]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Stop2" to="AudioManager" method="_on_stop_pressed" binds= [1]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Prev loop end" to="AudioManager" method="_on_prev_loop_end_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer2/Next loop end" to="AudioManager" method="_on_next_loop_end_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer/Transition" to="AudioManager" method="_on_transition_pressed" binds= [1]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer/Instant Tr" to="AudioManager" method="_on_transition_pressed" binds= [1, true]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer/Transition" to="AudioManager" method="_on_beat_transition_pressed" binds= [0]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer/Transition2" to="AudioManager" method="_on_beat_transition_pressed" binds= [1, 0.001]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer/Transition3" to="AudioManager" method="_on_beat_transition_pressed" binds= [2, 50.33]]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBoxContainer/VBoxContainer3/HBoxContainer/Transition4" to="AudioManager" method="_on_beat_transition_pressed" binds= [3]]
