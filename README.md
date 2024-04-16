@@ -4,4 +4,4 @@ An audio manager with different properties such as custom loop points, manual tr
 
 This project was made as a way to test my skills on Godot. Feel free to use this as a tool for your games, but don't expect it to be perfect.
 
-_(See README in [Spanish](README.es.md)._
+_See README in [Spanish](README.es.md)._
